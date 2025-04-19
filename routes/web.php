@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return 'Laravel is working!';
-});
+use App\Http\Controllers\OmikujiController; // ← ここも追加
+
+Route::get('/', [OmikujiController::class, 'index']);

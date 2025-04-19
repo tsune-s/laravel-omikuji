@@ -8,26 +8,21 @@ class OmikujiController extends Controller
 {
     public function index()
     {
-        return view('omikuji');
-    }
-
-    public function result(Request $request)
-    {
-        $request->validate(['name' => 'required|string|max:20']);
-
-        $name = $request->input('name');
-
-        $fortunes = [
-            '大吉' => '✨最高の1日があなたを待っている！',
-            '中吉' => '🌟ちょっといいことが起きる予感！',
-            '吉'   => '😌 そこそこ良い感じかも！',
-            '小吉' => '🙂 少し控えめに行動すると吉！',
-            '凶'   => '😱 今日は慎重にいこう…！',
+        $fortunes = ['大吉', '中吉', '小吉', '末吉', '凶'];
+        $messages = [
+            '今日は最高の日！✨',
+            '少しずつ前進しよう💪',
+            'コツコツが大事📚',
+            '気楽に行こう😌',
+            '慎重にね…😱'
         ];
 
-        $fortuneKey = array_rand($fortunes);
-        $message = $fortunes[$fortuneKey];
+        $index = rand(0, count($fortunes) - 1);
 
-        return view('omikuji_result', compact('name', 'fortuneKey', 'message'));
+        return view('omikuji', [
+            'name' => 'うんこまん', // ここは任意に
+            'fortune' => $fortunes[$index],
+            'message' => $messages[$index]
+        ]);
     }
 }

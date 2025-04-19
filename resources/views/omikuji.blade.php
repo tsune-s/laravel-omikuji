@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <title>おみくじ</title>
 </head>
 <body>
-    <h1>🔮 おみくじを引いてみよう！</h1>
+    <h1>🎉 {{ $name }} さんの運勢は…</h1>
+    <h2 style="font-size: 3em">{{ $fortune }}</h2>
+    <p>😳 {{ $message }}</p>
 
-    <form action="/omikuji/result" method="POST">
-        @csrf
-        <label>あなたの名前：</label>
-        <input type="text" name="name" required>
-        <button type="submit">おみくじを引く！</button>
-    </form>
+    <a href="/">もう一度引く</a>
 </body>
 </html>
