@@ -27,8 +27,9 @@ RUN echo "APP_KEY=${APP_KEY}" > .env
 # Composerインストールだけはビルド中に実行（安全）
 RUN composer install --no-dev --optimize-autoloader
 
-# Laravelの必要ディレクトリに書き込み権限を与える
-RUN chmod -R 775 storage bootstrap/cache
+# ←この部分を ↓ に置き換える
+RUN chmod -R 775 storage bootstrap/cache && \
+    chown -R www-data:www-data storage bootstrap/cache
 
 
 # Laravelキャッシュ生成 → Apache起動
