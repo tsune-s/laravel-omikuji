@@ -21,8 +21,11 @@ RUN a2enmod rewrite
 # 作業ディレクトリを設定
 WORKDIR /var/www/html
 
+# ダミーの.envを作成（APP_KEYはRenderのEnvironment変数で設定済み前提）
+RUN echo "APP_KEY=${APP_KEY}" > .env
+
 # Composerインストールだけはビルド中に実行（安全）
 RUN composer install --no-dev --optimize-autoloader
 
-# 起動時にLaravelをセットアップ（ここがポイント！）
-CMD php artisan key:generate && apache2-foreground
+# Laravelキャッシュ生成 → Apache起動
+CMD php artisan config:cache && apache2-foreground
